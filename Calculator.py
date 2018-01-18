@@ -3,8 +3,9 @@ from tkinter import*
 def binaryAddition(A,B):
     while(len(A)>len(B)):
         B='0'+B
-    while(len(B)<len(A)):
+    while(len(A)<len(B)):
         A='0'+A
+    print(A,B)
     A=list(A[::-1])
     B=list(B[::-1])
     A=[int(x) for x in A]
@@ -36,7 +37,7 @@ def binaryAddition(A,B):
 def binarySubstraction(a,b,o):
     while(len(a)>len(b)):
         b='0'+b
-    while(len(b)<len(a)):
+    while(len(a)<len(b)):
         a='0'+a
     a=list(a)
     a=[int(x) for x in a]
@@ -126,12 +127,12 @@ class app(Frame):
         try:
             ch=display.get()
             if '+' in ch:
-                s1=ch.split('+')[0]
-                s2=ch.split('+')[1]
+                s1=ch[0:ch.find('+')]
+                s2=ch[(ch.find('+')+1):]
                 display.set(binaryAddition(s1,s2))
             elif '-' in ch:
-                s1=ch.split('-')[0]
-                t=s2=ch.split('-')[1]
+                s1=ch[0:ch.find('-')]
+                t=s2=s1=ch[0:ch.find('-')]
                 display.set(binarySubstraction(s1,s2,t))
         except:
             display.set("ERROR")
