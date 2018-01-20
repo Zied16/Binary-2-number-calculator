@@ -5,7 +5,6 @@ def binaryAddition(A,B):
         B='0'+B
     while(len(A)<len(B)):
         A='0'+A
-    print(A,B)
     A=list(A[::-1])
     B=list(B[::-1])
     A=[int(x) for x in A]
@@ -28,13 +27,15 @@ def binaryAddition(A,B):
             m=0
         if i+1 in range(len(D)):
                 D[i+1]=m+D[i+1]
-        else :D.append(m)
+        elif m!=0:
+            D.append(m)
     D=D[::-1]
     for i in range(len(D)):
         C+=str(D[i])
+    
     return C
 
-def binarySubstraction(a,b,o):
+def binarySubstraction(a,b):
     while(len(a)>len(b)):
         b='0'+b
     while(len(a)<len(b)):
@@ -47,19 +48,16 @@ def binarySubstraction(a,b,o):
         elif a[i]==1:
             a[i]=0
     a=a[::-1]
-    b=list(b[::-1])
-    b=[int(x) for x in b]
     s7=''
     s8=[0 for i in range(len(a))]
     s5='1'
     while(len(s5)<len(a)):
         s5='0'+s5
-    s5=list(s5[::-1])
-    s5=[int(x) for x in s5]
-              
+    s5=list(s5)
+    s5=[int(x) for x in s5]          
     for i in range(len(a)):
         if a[i]+s5[i]+s8[i]>1:
-            if a[i]+s5[i]+s8[i]==2:
+            if (a[i]+s5[i]+s8[i])==2:
                 s8[i]=0
                 k=1
             if (a[i]+s5[i]+s8[i])>2:
@@ -73,11 +71,13 @@ def binarySubstraction(a,b,o):
             k=0
         if i+1 in range(len(s8)):
                 s8[i+1]=k+s8[i+1]
-        else :s8.append(k)
+        elif k!=0:
+            s8.append(k)
     s8=s8[::-1]
     for i in range(len(s8)):
         s7+=str(s8[i])
-    return(binaryAddition(s7,o))
+    print(s7)
+    return(binaryAddition(s7,b))
     
     
 def iCalc(source, side):
@@ -132,8 +132,8 @@ class app(Frame):
                 display.set(binaryAddition(s1,s2))
             elif '-' in ch:
                 s1=ch[0:ch.find('-')]
-                t=s2=s1=ch[0:ch.find('-')]
-                display.set(binarySubstraction(s1,s2,t))
+                s2=ch[0:ch.find('-')]
+                display.set(binarySubstraction(s1,s2))
         except:
             display.set("ERROR")
 
